@@ -155,9 +155,9 @@ def get_set_rotation(infilename, set_degrees=None):
             cos_deg = int((1<<16)*math.cos(radians))
             sin_deg = int((1<<16)*math.sin(radians))
             value = struct.pack(">9l", cos_deg, sin_deg, 0, -sin_deg, cos_deg, 0, 0, 0, (1<<30))
-            datastream.seek(-36, 1)
+            datastream.seek(-value.__len__(), 1)
             datastream.write(value)
-
+            datastream.flush()
         else:        
             for x in range(9):
                 if (x + 1) % 3:
